@@ -128,6 +128,7 @@ namespace CSharpAdvanced.TaskExamples
                                     ex.Data.Add("Thrower", Thread.CurrentThread.Name);
                                     throw ex;
                                 }).Wait();
+
                             }
                             catch (AggregateException ex)
                             {
@@ -136,6 +137,33 @@ namespace CSharpAdvanced.TaskExamples
                         }).Wait();
 
                     });
+
+                    #region Use Task.Factory.StartNew and use creation option attached to parent
+                    //var t1 = Task.Factory.StartNew(() =>
+                    //{
+                    //    Thread.CurrentThread.Name = "T1 parent";
+                    //    Task.Factory.StartNew(() =>
+                    //    {
+                    //        try
+                    //        {
+                    //            var cc = Task.Factory.StartNew(() =>
+                    //            {
+                    //                Thread.CurrentThread.Name = "T1 child child";
+                    //                var ex = new NotImplementedException("T1 child child");
+                    //                ex.Data.Add("Thrower", Thread.CurrentThread.Name);
+                    //                throw ex;
+                    //            }, TaskCreationOptions.AttachedToParent);
+
+                    //        }
+                    //        catch (AggregateException ex)
+                    //        {
+                    //            throw ex.Flatten();
+                    //        }
+                    //    }, TaskCreationOptions.AttachedToParent);
+
+                    //});
+                    #endregion
+
                     var t2 = Task.Run(() =>
                     {
                         Thread.CurrentThread.Name = "T2";
