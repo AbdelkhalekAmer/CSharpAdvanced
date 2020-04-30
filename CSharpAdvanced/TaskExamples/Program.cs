@@ -151,7 +151,8 @@ namespace CSharpAdvanced.TaskExamples
                         throw ex;
                     });
 
-                    Task.WhenAll(t1, t2, t3).Wait();
+                    Task.WaitAll(t1, t2, t3); // the same as 
+                    // Task.WhenAll(t1, t2, t3).Wait();
 
                 }
                 catch (AggregateException ex)
