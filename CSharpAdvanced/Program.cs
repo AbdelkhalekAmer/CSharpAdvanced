@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Threading;
 
 namespace CSharpAdvanced
 {
@@ -8,6 +9,8 @@ namespace CSharpAdvanced
         delegate void User();
         public static void Main(string[] args)
         {
+
+            Thread.CurrentThread.Name = "Main";
 
             //DelegatesExample.Program.Main();
 
@@ -18,6 +21,8 @@ namespace CSharpAdvanced
             //TryMethodPattern.Program.Main();
 
             //ConcurrentCollections.Program.Main();
+
+            TaskExamples.Program.Main();
 
             Console.WriteLine("Program has finished...");
             Console.ReadKey();
