@@ -32,10 +32,45 @@ namespace CSharpAdvanced.TaskExamples
 
             //Run_TaskContinuation().Wait();
 
-            Run_AggregateExceptions();
+            //Run_AggregateExceptions();
 
             //Run_Wait_When();
 
+            Run_Parallel_For_Each();
+
+        }
+
+        static void Run_Parallel_For_Each()
+        {
+            try
+            {
+                Parallel.ForEach(new[] { 1, 2, 3 }, s =>
+                {
+                    if (s == 2)
+                    {
+                        throw new NotImplementedException();
+                    }
+                    Console.WriteLine(s);
+                });
+            }
+            catch (AggregateException ex)
+            {
+
+                ex.Flatten().Handle(exc =>
+                {
+                    Console.WriteLine("==========================================");
+                    Console.WriteLine($"{exc.Message}");
+                    Console.WriteLine("==========================================");
+
+                    return true;
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("********************************************");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("********************************************");
+            }
         }
 
         static void Run_Wait_When()
@@ -179,7 +214,9 @@ namespace CSharpAdvanced.TaskExamples
                         throw ex;
                     });
 
-                    Task.WaitAll(t1, t2, t3); // the same as 
+                    Task.WaitAll(t1, t2, t3);
+
+                    // the same
                     // Task.WhenAll(t1, t2, t3).Wait();
 
                 }
