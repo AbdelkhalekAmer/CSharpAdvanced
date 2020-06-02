@@ -22,7 +22,9 @@ namespace CSharpAdvanced
 
             //ConcurrentCollections.Program.Main();
 
-            TaskExamples.Program.Main();
+            //TaskExamples.Program.Main();
+
+            OOP.Program.Main();
 
             Console.WriteLine("Program has finished...");
             Console.ReadKey();
